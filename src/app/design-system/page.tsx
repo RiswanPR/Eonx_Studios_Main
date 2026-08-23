@@ -33,6 +33,8 @@ import { Menu } from "@/components/ui/icons/Menu";
 import { Minus } from "@/components/ui/icons/Minus";
 import { Plus } from "@/components/ui/icons/Plus";
 import { SectionHeader } from "@/components/shared/SectionHeader";
+import { EonxLogo } from "@/components/brand/EonxLogo";
+import { EonxSymbol } from "@/components/brand/EonxSymbol";
 
 const colors = [
   ["Eonx Black", "var(--color-eonx-black)"],
@@ -69,7 +71,37 @@ export default function DesignSystemPage() {
       </Section>
 
       {/* ============================================================
-          01 / COLOR TOKENS
+          01 / BRAND IDENTITY & LOGO MARKS
+          ============================================================ */}
+      <Section>
+        <Container>
+          <Stack gap="md">
+            <Heading level={2} size="lg">
+              Brand Identity & Vector Marks
+            </Heading>
+
+            <div className="grid gap-6 md:grid-cols-3">
+              <Card className="flex flex-col items-center justify-center p-8 text-center">
+                <EonxSymbol size={48} className="text-white" />
+                <Label className="mt-4">Symbol (48px)</Label>
+              </Card>
+
+              <Card className="flex flex-col items-center justify-center p-8 text-center">
+                <EonxSymbol size={64} glow className="text-[var(--color-periwinkle)]" />
+                <Label className="mt-4">Glowing Symbol (64px)</Label>
+              </Card>
+
+              <Card className="flex flex-col items-center justify-center p-8 text-center">
+                <EonxLogo size="lg" href={undefined} />
+                <Label className="mt-4">Full Wordmark</Label>
+              </Card>
+            </div>
+          </Stack>
+        </Container>
+      </Section>
+
+      {/* ============================================================
+          02 / COLOR TOKENS
           ============================================================ */}
       <Section>
         <Container>
@@ -104,7 +136,7 @@ export default function DesignSystemPage() {
       </Section>
 
       {/* ============================================================
-          02 / TYPOGRAPHY SCALE
+          03 / TYPOGRAPHY SCALE
           ============================================================ */}
       <Section>
         <Container>
@@ -134,7 +166,7 @@ export default function DesignSystemPage() {
       </Section>
 
       {/* ============================================================
-          03 / CORE UI COMPONENTS
+          04 / CORE UI COMPONENTS
           ============================================================ */}
       <Section>
         <Container>
@@ -261,7 +293,7 @@ export default function DesignSystemPage() {
       </Section>
 
       {/* ============================================================
-          04 / FORM FOUNDATION LABORATORY
+          05 / FORM FOUNDATION LABORATORY
           ============================================================ */}
       <Section>
         <Container>
@@ -349,7 +381,7 @@ export default function DesignSystemPage() {
       </Section>
 
       {/* ============================================================
-          05 / MODAL LABORATORY
+          06 / MODAL LABORATORY
           ============================================================ */}
       <Section>
         <Container>
@@ -414,7 +446,7 @@ export default function DesignSystemPage() {
       </Section>
 
       {/* ============================================================
-          06 / FEEDBACK & STATE PRIMITIVES
+          07 / FEEDBACK & STATE PRIMITIVES
           ============================================================ */}
       <Section>
         <Container>
