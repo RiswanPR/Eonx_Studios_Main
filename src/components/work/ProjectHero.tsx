@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { Project } from "@/types/project";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { RevealText } from "@/components/shared/motion/RevealText";
 import { Container } from "@/components/ui/Container";
 import { Label } from "@/components/ui/Label";
@@ -23,21 +23,12 @@ export function ProjectHero({ project }: ProjectHeroProps) {
 
       <Container className="relative z-10">
         <div className="max-w-4xl">
-          <nav
-            aria-label="Breadcrumb"
-            className="flex items-center gap-2 text-xs uppercase tracking-[0.14em]"
-          >
-            <Link
-              href="/work"
-              className="text-[var(--foreground-muted)] transition-colors hover:text-[var(--foreground)]"
-            >
-              Work
-            </Link>
-            <span className="text-[var(--foreground-muted)]">/</span>
-            <span className="text-[var(--color-periwinkle)]">
-              {project.title}
-            </span>
-          </nav>
+          <Breadcrumbs
+            items={[
+              { name: "Work", href: "/work" },
+              { name: project.title, href: `/work/${project.slug}` },
+            ]}
+          />
 
           <div className="mt-8">
             <Label>

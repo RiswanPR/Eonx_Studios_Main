@@ -1,6 +1,9 @@
 import { notFound } from "next/navigation";
+import { StructuredData } from "@/components/seo/StructuredData";
 import { ServiceDetailPage } from "@/components/services/ServiceDetailPage";
 import { getService, services } from "@/content/services/services";
+import { buildMetadata } from "@/lib/seo/metadata";
+import { getBreadcrumbSchema, getServiceSchema } from "@/lib/seo/schema";
 
 interface ServicePageProps {
   params: Promise<{
@@ -24,10 +27,11 @@ export async function generateMetadata({ params }: ServicePageProps) {
     return {};
   }
 
-  return {
+  return buildMetadata({
     title: service.seo.title,
     description: service.seo.description,
-  };
+    path: `/services/${service.slug}`,
+  });
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
@@ -38,5 +42,22 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
-  return <ServiceDetailPage service={service} />;
+  const breadcrumbs = [
+    {
+      name: "Services",
+      href: "/services",
+    },
+    {
+      name: service.name,
+      href: `/services/${service.slug}`,
+    },
+  ];
+
+  return (
+    <>
+      <StructuredData data={getServiceSchema(service)} />
+      <StructuredData data={getBreadcrumbSchema(breadcrumbs)} />
+      <ServiceDetailPage service={service} />
+    </>
+  );
 }

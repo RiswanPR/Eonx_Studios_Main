@@ -1,5 +1,5 @@
-import Link from "next/link";
 import type { Service } from "@/types/service";
+import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { ServiceVisual } from "@/components/services/ServiceVisual";
 import { RevealText } from "@/components/shared/motion/RevealText";
 import { ButtonLink } from "@/components/ui/Button";
@@ -41,21 +41,12 @@ export function ServiceHero({ service }: ServiceHeroProps) {
         <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-8">
             <Stack gap="lg">
-              <nav
-                aria-label="Breadcrumb"
-                className="flex items-center gap-2 text-xs uppercase tracking-[0.14em]"
-              >
-                <Link
-                  href="/services"
-                  className="text-[var(--foreground-muted)] transition-colors hover:text-[var(--foreground)]"
-                >
-                  Services
-                </Link>
-                <span className="text-[var(--foreground-muted)]">/</span>
-                <span className="text-[var(--color-periwinkle)]">
-                  {service.name}
-                </span>
-              </nav>
+              <Breadcrumbs
+                items={[
+                  { name: "Services", href: "/services" },
+                  { name: service.name, href: `/services/${service.slug}` },
+                ]}
+              />
 
               <Label>
                 {service.number} / {service.name}

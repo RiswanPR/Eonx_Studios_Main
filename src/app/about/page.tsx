@@ -10,12 +10,14 @@ import { AboutProcess } from "@/components/sections/about/AboutProcess";
 import { AboutStory } from "@/components/sections/about/AboutStory";
 import { AboutTeam } from "@/components/sections/about/AboutTeam";
 import { AboutValues } from "@/components/sections/about/AboutValues";
+import { buildMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "About Eonx — Creative Technology Studio",
   description:
-    "Meet Eonx, the creative technology studio combining strategy, design, content and engineering.",
-};
+    "Discover Eonx, the creative technology studio combining strategy, design, content and engineering.",
+  path: "/about",
+});
 
 export default function AboutPage() {
   return (

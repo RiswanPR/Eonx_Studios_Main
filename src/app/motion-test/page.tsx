@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {
   FadeIn,
   Magnetic,
@@ -5,12 +6,14 @@ import {
   RevealText,
   ScrollReveal,
 } from "@/components/shared/motion";
-
-import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
 import { Stack } from "@/components/ui/Stack";
+import { noIndexMetadata } from "@/lib/seo/noIndex";
+
+export const metadata: Metadata = noIndexMetadata;
 
 export default function MotionTestPage() {
   return (

@@ -2,11 +2,13 @@ import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/LegalLayout";
 import { LegalSection } from "@/components/legal/LegalSection";
 import { privacyContent } from "@/content/legal/privacy";
+import { buildMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Privacy Policy — Eonx",
   description: "Eonx privacy policy and information handling practices.",
-};
+  path: "/privacy",
+});
 
 export default function PrivacyPage() {
   return (

@@ -1,8 +1,12 @@
+import type { Metadata } from "next";
 import { Container } from "@/components/ui/Container";
 import { Heading } from "@/components/ui/Heading";
 import { Section } from "@/components/ui/Section";
 import { Stack } from "@/components/ui/Stack";
 import { Text } from "@/components/ui/Text";
+import { noIndexMetadata } from "@/lib/seo/noIndex";
+
+export const metadata: Metadata = noIndexMetadata;
 
 export default function NavigationTestPage() {
   return (

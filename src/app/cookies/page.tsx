@@ -2,11 +2,14 @@ import type { Metadata } from "next";
 import { LegalLayout } from "@/components/legal/LegalLayout";
 import { LegalSection } from "@/components/legal/LegalSection";
 import { cookiesContent } from "@/content/legal/cookies";
+import { buildMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Cookie Policy — Eonx",
-  description: "Information about cookies and similar technologies used by Eonx.",
-};
+  description:
+    "Information about cookies and similar technologies used by Eonx.",
+  path: "/cookies",
+});
 
 export default function CookiesPage() {
   return (

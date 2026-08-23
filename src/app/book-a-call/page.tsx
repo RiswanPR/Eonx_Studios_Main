@@ -3,11 +3,13 @@ import { BookingForm } from "@/components/forms/booking/BookingForm";
 import { BookingHero } from "@/components/sections/booking/BookingHero";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
+import { buildMetadata } from "@/lib/seo/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = buildMetadata({
   title: "Book a Call — Eonx",
   description: "Tell Eonx about your next project and start a conversation.",
-};
+  path: "/book-a-call",
+});
 
 export default function BookACallPage() {
   return (
