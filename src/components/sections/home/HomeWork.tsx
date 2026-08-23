@@ -24,15 +24,8 @@ export function HomeWork() {
         </div>
 
         <div className="grid gap-6 md:grid-cols-2">
-          {featured.map((project, index) => (
-            <ProjectCard
-              key={project.slug}
-              title={project.title}
-              client={project.client}
-              year={project.year}
-              slug={project.slug}
-              featured={index === 0}
-            />
+          {featured.map((project) => (
+            <ProjectCard key={project.slug} project={project} />
           ))}
         </div>
       </Container>

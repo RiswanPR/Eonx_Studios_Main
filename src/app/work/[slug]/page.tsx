@@ -1,17 +1,40 @@
+import { notFound } from "next/navigation";
+import { getProject, projects } from "@/content/projects/projects";
+import { ProjectDetailPage } from "@/components/work/ProjectDetailPage";
+
 interface ProjectPageProps {
-    params: Promise<{
-        slug: string;
-    }>;
+  params: Promise<{
+    slug: string;
+  }>;
 }
 
-export default async function ProjectPage({
-    params,
-}: ProjectPageProps) {
-    const { slug } = await params;
+export function generateStaticParams() {
+  return projects.map((project) => ({
+    slug: project.slug,
+  }));
+}
 
-    return (
-        <main>
-            <h1>Project: {slug}</h1>
-        </main>
-    );
+export async function generateMetadata({ params }: ProjectPageProps) {
+  const { slug } = await params;
+  const project = getProject(slug);
+
+  if (!project) {
+    return {};
+  }
+
+  return {
+    title: project.seo.title,
+    description: project.seo.description,
+  };
+}
+
+export default async function ProjectPage({ params }: ProjectPageProps) {
+  const { slug } = await params;
+  const project = getProject(slug);
+
+  if (!project) {
+    notFound();
+  }
+
+  return <ProjectDetailPage project={project} />;
 }
