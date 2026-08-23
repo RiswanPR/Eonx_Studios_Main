@@ -1,7 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useSyncExternalStore } from "react";
 import type { AnalyticsEventPayload } from "@/lib/analytics/provider";
+
+const emptySubscribe = () => () => {};
 
 interface AnalyticsDebugProps {
   enabled?: boolean;
@@ -10,6 +12,11 @@ interface AnalyticsDebugProps {
 export function AnalyticsDebug({
   enabled = process.env.NODE_ENV === "development",
 }: AnalyticsDebugProps) {
+  const isMounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
   const [events, setEvents] = useState<AnalyticsEventPayload[]>([]);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -29,8 +36,8 @@ export function AnalyticsDebug({
     return () => window.removeEventListener("eonx:analytics", handler);
   }, [enabled]);
 
-  // Never render in production
-  if (!enabled || process.env.NODE_ENV === "production") {
+  // Never render during SSR hydration or in production
+  if (!isMounted || !enabled || process.env.NODE_ENV === "production") {
     return null;
   }
 

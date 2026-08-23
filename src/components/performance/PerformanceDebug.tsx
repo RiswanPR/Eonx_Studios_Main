@@ -1,17 +1,24 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useSyncExternalStore } from "react";
 import { usePerformance } from "@/components/performance/PerformanceProvider";
 import { useExperience } from "@/experience/ExperienceProvider";
 import { getDeviceTier } from "@/experience/performance/deviceTier";
 
+const emptySubscribe = () => () => {};
+
 export function PerformanceDebug() {
+  const isMounted = useSyncExternalStore(
+    emptySubscribe,
+    () => true,
+    () => false,
+  );
   const [isOpen, setIsOpen] = useState(false);
   const perf = usePerformance();
   const exp = useExperience();
 
-  // Never render in production
-  if (process.env.NODE_ENV === "production") {
+  // Never render during SSR hydration or in production
+  if (!isMounted || process.env.NODE_ENV === "production") {
     return null;
   }
 
