@@ -1,16 +1,15 @@
 import type { Project } from "@/types/project";
-import { ProjectHero } from "@/components/work/ProjectHero";
-import { ProjectOverview } from "@/components/work/ProjectOverview";
 import { CaseStudySection } from "@/components/work/CaseStudySection";
-import { ProjectTechnology } from "@/components/work/ProjectTechnology";
-import { ProjectOutcome } from "@/components/work/ProjectOutcome";
-import { ProjectGallery } from "@/components/work/ProjectGallery";
-import { ProjectTestimonial } from "@/components/work/ProjectTestimonial";
-import { RelatedServices } from "@/components/work/RelatedServices";
-import { RelatedProjects } from "@/components/work/RelatedProjects";
 import { NextProject } from "@/components/work/NextProject";
 import { ProjectCTA } from "@/components/work/ProjectCTA";
-import { SimpleFooter } from "@/components/shared/SimpleFooter";
+import { ProjectGallery } from "@/components/work/ProjectGallery";
+import { ProjectHero } from "@/components/work/ProjectHero";
+import { ProjectOutcome } from "@/components/work/ProjectOutcome";
+import { ProjectOverview } from "@/components/work/ProjectOverview";
+import { ProjectTechnology } from "@/components/work/ProjectTechnology";
+import { ProjectTestimonial } from "@/components/work/ProjectTestimonial";
+import { RelatedProjects } from "@/components/work/RelatedProjects";
+import { RelatedServices } from "@/components/work/RelatedServices";
 
 interface ProjectDetailPageProps {
   project: Project;
@@ -63,7 +62,6 @@ export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
       <RelatedProjects project={project} />
       <NextProject project={project} />
       <ProjectCTA />
-      <SimpleFooter />
     </main>
   );
 }

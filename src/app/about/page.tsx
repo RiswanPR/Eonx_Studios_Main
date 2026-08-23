@@ -1,16 +1,15 @@
 import type { Metadata } from "next";
+import { AboutCTA } from "@/components/sections/about/AboutCTA";
+import { AboutCapabilities } from "@/components/sections/about/AboutCapabilities";
+import { AboutCulture } from "@/components/sections/about/AboutCulture";
+import { AboutEvolution } from "@/components/sections/about/AboutEvolution";
 import { AboutHero } from "@/components/sections/about/AboutHero";
 import { AboutIntro } from "@/components/sections/about/AboutIntro";
-import { AboutStory } from "@/components/sections/about/AboutStory";
 import { AboutPhilosophy } from "@/components/sections/about/AboutPhilosophy";
-import { AboutValues } from "@/components/sections/about/AboutValues";
 import { AboutProcess } from "@/components/sections/about/AboutProcess";
+import { AboutStory } from "@/components/sections/about/AboutStory";
 import { AboutTeam } from "@/components/sections/about/AboutTeam";
-import { AboutCulture } from "@/components/sections/about/AboutCulture";
-import { AboutCapabilities } from "@/components/sections/about/AboutCapabilities";
-import { AboutEvolution } from "@/components/sections/about/AboutEvolution";
-import { AboutCTA } from "@/components/sections/about/AboutCTA";
-import { SimpleFooter } from "@/components/shared/SimpleFooter";
+import { AboutValues } from "@/components/sections/about/AboutValues";
 
 export const metadata: Metadata = {
   title: "About Eonx — Creative Technology Studio",
@@ -32,7 +31,6 @@ export default function AboutPage() {
       <AboutCapabilities />
       <AboutEvolution />
       <AboutCTA />
-      <SimpleFooter />
     </main>
   );
 }

@@ -4,7 +4,6 @@ import { useMemo, useState } from "react";
 import { WorkHero } from "@/components/sections/work/WorkHero";
 import { ProjectFilter } from "@/components/work/ProjectFilter";
 import { ProjectGrid } from "@/components/work/ProjectGrid";
-import { SimpleFooter } from "@/components/shared/SimpleFooter";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 import { TextLink } from "@/components/ui/TextLink";
@@ -64,14 +63,12 @@ export default function WorkPage() {
           ) : activeCategory !== "all" && filteredProjects.length === 0 ? (
             <div className="py-20 text-center">
               <p className="text-base text-[var(--foreground-muted)]">
-                More work in this category is coming soon.
+                More work in this category will be featured soon.
               </p>
             </div>
           ) : null}
         </Container>
       </Section>
-
-      <SimpleFooter />
     </main>
   );
 }

@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { BookingForm } from "@/components/forms/booking/BookingForm";
 import { BookingHero } from "@/components/sections/booking/BookingHero";
-import { SimpleFooter } from "@/components/shared/SimpleFooter";
 import { Container } from "@/components/ui/Container";
 import { Section } from "@/components/ui/Section";
 
@@ -20,8 +19,6 @@ export default function BookACallPage() {
           <BookingForm />
         </Container>
       </Section>
-
-      <SimpleFooter />
     </main>
   );
 }

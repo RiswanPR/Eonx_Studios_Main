@@ -5,7 +5,6 @@ import { useState } from "react";
 
 import { ServicesHero } from "@/components/sections/services/ServicesHero";
 import { ServiceCard } from "@/components/services/ServiceCard";
-import { SimpleFooter } from "@/components/shared/SimpleFooter";
 import { Container } from "@/components/ui/Container";
 import { Label } from "@/components/ui/Label";
 import { Section } from "@/components/ui/Section";
@@ -83,8 +82,6 @@ export default function ServicesPage() {
           </div>
         </Container>
       </Section>
-
-      <SimpleFooter />
     </main>
   );
 }

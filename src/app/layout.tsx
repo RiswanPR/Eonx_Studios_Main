@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Footer } from "@/components/footer/Footer";
+import { CookieConsent } from "@/components/legal/CookieConsent";
 import { Navbar } from "@/components/navigation/Navbar";
 import { MotionProvider } from "@/components/shared/motion/MotionProvider";
 import { PageTransition } from "@/components/shared/motion/PageTransition";
@@ -23,6 +25,8 @@ export default function RootLayout({
           <ExperienceProvider>
             <Navbar />
             <PageTransition>{children}</PageTransition>
+            <Footer />
+            <CookieConsent />
           </ExperienceProvider>
         </MotionProvider>
       </body>

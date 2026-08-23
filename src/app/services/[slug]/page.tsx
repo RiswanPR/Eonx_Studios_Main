@@ -1,12 +1,14 @@
 import { notFound } from "next/navigation";
-import { getService, services } from "@/content/services/services";
 import { ServiceDetailPage } from "@/components/services/ServiceDetailPage";
+import { getService, services } from "@/content/services/services";
 
 interface ServicePageProps {
   params: Promise<{
     slug: string;
   }>;
 }
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return services.map((service) => ({

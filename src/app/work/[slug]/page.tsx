@@ -1,12 +1,14 @@
 import { notFound } from "next/navigation";
-import { getProject, projects } from "@/content/projects/projects";
 import { ProjectDetailPage } from "@/components/work/ProjectDetailPage";
+import { getProject, projects } from "@/content/projects/projects";
 
 interface ProjectPageProps {
   params: Promise<{
     slug: string;
   }>;
 }
+
+export const dynamicParams = false;
 
 export function generateStaticParams() {
   return projects.map((project) => ({
