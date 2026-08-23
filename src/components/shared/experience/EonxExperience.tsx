@@ -10,19 +10,21 @@ export function EonxExperience() {
   const show3D = webGLAvailable && quality !== "static";
 
   return (
-    <div
-      aria-hidden="true"
-      className="relative flex min-h-[500px] items-center justify-center overflow-hidden rounded-[var(--radius-xl)]"
-    >
-      {show3D ? (
-        <div className="absolute inset-0">
-          <EonxCanvas />
-        </div>
-      ) : (
-        <EonxStaticOrbital />
-      )}
+    <div className="relative aspect-square w-full">
+      <div
+        aria-hidden="true"
+        className="absolute inset-[-10%] rounded-full bg-[radial-gradient(circle,rgba(73,40,194,0.16),transparent_60%)] blur-3xl"
+      />
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(73,40,194,0.12),transparent_55%)]" />
+      <div aria-hidden="true" className="absolute inset-0">
+        {show3D ? (
+          <EonxCanvas />
+        ) : (
+          <div className="flex h-full items-center justify-center">
+            <EonxStaticOrbital />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
