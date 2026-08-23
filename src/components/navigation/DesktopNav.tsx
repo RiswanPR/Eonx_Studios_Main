@@ -1,110 +1,57 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { TrackedCTA } from "@/components/analytics/TrackedCTA";
-import { MegaMenu } from "@/components/navigation/MegaMenu";
-import {
-  mainNavigation,
-  primaryCta,
-} from "@/config/navigation";
-import { cn } from "@/lib/utils/cn";
+import { navigationItems } from "@/config/navigation";
+import { NavLink } from "./NavLink";
+import { ServicesMegaMenu } from "./ServicesMegaMenu";
+import { ServicesTrigger } from "./ServicesTrigger";
 
-export function DesktopNav() {
-  const pathname = usePathname();
+interface DesktopNavProps {
+  onOpenCommand: () => void;
+}
+
+export function DesktopNav({ onOpenCommand }: DesktopNavProps) {
   const [servicesOpen, setServicesOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isServicesActive = pathname.startsWith("/services");
 
   return (
     <nav
-      className="hidden items-center gap-8 md:flex"
-      aria-label="Primary navigation"
-      onMouseLeave={() => setServicesOpen(false)}
+      aria-label="Primary Desktop Navigation"
+      className="relative hidden items-center gap-1 md:flex"
     >
-      <div className="flex items-center gap-7">
-        {mainNavigation.map((item) => {
-          const isServices = Boolean(item.children);
-
-          const active = isServices
-            ? pathname.startsWith("/services")
-            : pathname === item.href;
-
-          if (isServices) {
-            return (
-              <div
-                key={item.label}
-                className="relative"
-                onMouseEnter={() => setServicesOpen(true)}
-              >
-                <button
-                  type="button"
-                  className={cn(
-                    "group inline-flex items-center gap-2",
-                    "type-body-sm",
-                    "text-[var(--foreground)]",
-                    "transition-colors duration-[var(--duration-fast)]",
-                    "hover:text-[var(--color-periwinkle)]",
-                    "focus-visible:outline-2",
-                    "focus-visible:outline-offset-4",
-                    "focus-visible:outline-[var(--color-periwinkle)]",
-                    active && "text-[var(--color-periwinkle)]",
-                  )}
-                  aria-expanded={servicesOpen}
-                  aria-haspopup="true"
-                  onClick={() => setServicesOpen((current) => !current)}
-                >
-                  {item.label}
-
-                  <span
-                    aria-hidden="true"
-                    className={cn(
-                      "text-xs transition-transform duration-[var(--duration-standard)]",
-                      servicesOpen && "rotate-180",
-                    )}
-                  >
-                    ↓
-                  </span>
-                </button>
-
-                {servicesOpen ? (
-                  <MegaMenu
-                    items={item.children ?? []}
-                    onClose={() => setServicesOpen(false)}
-                  />
-                ) : null}
-              </div>
-            );
-          }
-
+      {navigationItems.map((item) => {
+        if (item.megaMenu === "services") {
           return (
-            <Link
-              key={item.label}
-              href={item.href}
-              className={cn(
-                "type-body-sm",
-                "text-[var(--foreground)]",
-                "transition-colors duration-[var(--duration-fast)]",
-                "hover:text-[var(--color-periwinkle)]",
-                "focus-visible:outline-2",
-                "focus-visible:outline-offset-4",
-                "focus-visible:outline-[var(--color-periwinkle)]",
-                active && "text-[var(--color-periwinkle)]",
-              )}
-            >
-              {item.label}
-            </Link>
-          );
-        })}
-      </div>
+            <div key={item.label} className="relative">
+              <ServicesTrigger
+                open={servicesOpen}
+                active={isServicesActive}
+                onClick={() => setServicesOpen((prev) => !prev)}
+              />
 
-      <TrackedCTA
-        href={primaryCta.href}
-        size="sm"
-        location="navbar"
-        label={primaryCta.label}
+              <ServicesMegaMenu
+                open={servicesOpen}
+                onClose={() => setServicesOpen(false)}
+              />
+            </div>
+          );
+        }
+
+        return <NavLink key={item.label} label={item.label} href={item.href} />;
+      })}
+
+      {/* Command Palette Trigger */}
+      <button
+        type="button"
+        onClick={onOpenCommand}
+        aria-label="Open Eonx command center"
+        className="group relative ml-2 flex items-center gap-1.5 rounded-full border border-[var(--color-border-default)] bg-[rgba(255,255,255,0.03)] px-3 py-1.5 text-[10px] font-mono uppercase tracking-[0.14em] text-[var(--color-text-muted)] transition-colors hover:border-[var(--color-border-strong)] hover:text-white"
       >
-        {primaryCta.label}
-      </TrackedCTA>
+        <span>⌘K</span>
+      </button>
     </nav>
   );
 }

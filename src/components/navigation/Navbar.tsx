@@ -1,132 +1,113 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { DesktopNav } from "@/components/navigation/DesktopNav";
-import { MobileNav } from "@/components/navigation/MobileNav";
-import { NavigationLogo } from "@/components/navigation/NavigationLogo";
+import { useCallback, useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import { useCommandPalette } from "@/hooks/useCommandPalette";
 import { cn } from "@/lib/utils/cn";
+import { CommandPalette } from "./CommandPalette";
+import { DesktopNav } from "./DesktopNav";
+import { MobileMenu } from "./MobileMenu";
+import { MobileMenuButton } from "./MobileMenuButton";
+import { NavbarBackdrop } from "./NavbarBackdrop";
+import { NavbarCTA } from "./NavbarCTA";
+import { NavigationLogo } from "./NavigationLogo";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [commandOpen, setCommandOpen] = useState(false);
+  const pathname = usePathname();
+  const [prevPathname, setPrevPathname] = useState(pathname);
 
+  // Close overlays immediately when route changes
+  if (prevPathname !== pathname) {
+    setPrevPathname(pathname);
+    setMobileOpen(false);
+    setCommandOpen(false);
+  }
+
+  // Passive threshold scroll listener
   useEffect(() => {
     const handleScroll = () => {
-      setScrolled(window.scrollY > 24);
+      const isPastThreshold = window.scrollY > 24;
+      setScrolled((prev) => (prev === isPastThreshold ? prev : isPastThreshold));
     };
 
     handleScroll();
-
-    window.addEventListener("scroll", handleScroll, {
-      passive: true,
-    });
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
-      window.removeEventListener(
-        "scroll",
-        handleScroll,
-      );
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  useEffect(() => {
-    document.body.style.overflow = mobileOpen
-      ? "hidden"
-      : "";
+  // Hook global ⌘K / Ctrl+K keyboard shortcut
+  const handleOpenCommand = useCallback(() => {
+    setMobileOpen(false);
+    setCommandOpen(true);
+  }, []);
 
-    return () => {
-      document.body.style.overflow = "";
-    };
-  }, [mobileOpen]);
-
-  useEffect(() => {
-    if (!mobileOpen) {
-      return;
-    }
-
-    const handleKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") {
-        setMobileOpen(false);
-      }
-    };
-
-    document.addEventListener(
-      "keydown",
-      handleKeyDown,
-    );
-
-    return () => {
-      document.removeEventListener(
-        "keydown",
-        handleKeyDown,
-      );
-    };
-  }, [mobileOpen]);
+  useCommandPalette(handleOpenCommand);
 
   return (
     <>
       <header
         className={cn(
-          "fixed inset-x-0 top-0 z-50",
+          "fixed inset-x-0 top-3 md:top-5 z-[var(--z-navbar)]",
+          "mx-auto w-[calc(100%-1.5rem)] md:w-[calc(100%-3rem)] max-w-[1520px]",
           "transition-all duration-[var(--duration-standard)]",
-          scrolled
-            ? "border-b border-[var(--color-border-subtle)] bg-[rgba(4,6,7,0.78)] backdrop-blur-[var(--blur-md)]"
-            : "bg-transparent",
         )}
       >
-        <div className="mx-auto flex h-20 w-full max-w-[var(--container-max)] items-center justify-between px-[var(--page-padding)]">
-          <NavigationLogo />
+        <div
+          className={cn(
+            "relative flex h-16 items-center justify-between px-5 md:px-8",
+            "rounded-full transition-all duration-[var(--duration-standard)]",
+            scrolled
+              ? "eonx-glass-strong border border-[var(--color-border-default)] shadow-[var(--shadow-sm)]"
+              : "border border-transparent bg-transparent",
+          )}
+        >
+          {/* Subtle directional reflection on scroll */}
+          <NavbarBackdrop active={scrolled} />
 
-          <DesktopNav />
+          {/* Left: Brand Identity */}
+          <div className="relative z-10 flex items-center">
+            <NavigationLogo />
+          </div>
 
-          <button
-            type="button"
-            aria-label={
-              mobileOpen
-                ? "Close navigation"
-                : "Open navigation"
-            }
-            aria-expanded={mobileOpen}
-            aria-controls="mobile-navigation"
-            className="relative z-50 inline-flex size-11 items-center justify-center rounded-full border border-[var(--color-border-default)] text-[var(--foreground)] md:hidden"
-            onClick={() =>
-              setMobileOpen((current) => !current)
-            }
-          >
-            <span
-              aria-hidden="true"
-              className="relative block h-4 w-5"
-            >
-              <span
-                className={cn(
-                  "absolute left-0 top-0 h-px w-full bg-current transition-transform duration-[var(--duration-standard)]",
-                  mobileOpen &&
-                    "top-1/2 -translate-y-1/2 rotate-45",
-                )}
-              />
+          {/* Center: Desktop Navigation & Mega Menu */}
+          <div className="relative z-10">
+            <DesktopNav onOpenCommand={handleOpenCommand} />
+          </div>
 
-              <span
-                className={cn(
-                  "absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-current transition-opacity duration-[var(--duration-fast)]",
-                  mobileOpen && "opacity-0",
-                )}
-              />
+          {/* Right: Conversion CTA & Mobile Toggle */}
+          <div className="relative z-10 flex items-center gap-3">
+            <div className="hidden sm:block">
+              <NavbarCTA />
+            </div>
 
-              <span
-                className={cn(
-                  "absolute bottom-0 left-0 h-px w-full bg-current transition-transform duration-[var(--duration-standard)]",
-                  mobileOpen &&
-                    "bottom-1/2 translate-y-1/2 -rotate-45",
-                )}
-              />
-            </span>
-          </button>
+            <MobileMenuButton
+              open={mobileOpen}
+              onClick={() => {
+                setCommandOpen(false);
+                setMobileOpen((prev) => !prev);
+              }}
+            />
+          </div>
         </div>
       </header>
 
-      <MobileNav
+      {/* Full-screen Mobile Menu */}
+      <MobileMenu
         open={mobileOpen}
         onClose={() => setMobileOpen(false)}
+        onOpenCommand={handleOpenCommand}
+      />
+
+      {/* Global ⌘K Command Palette */}
+      <CommandPalette
+        open={commandOpen}
+        onClose={() => setCommandOpen(false)}
       />
     </>
   );
