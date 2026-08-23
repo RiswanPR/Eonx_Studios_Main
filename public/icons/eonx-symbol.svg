@@ -1,47 +1,41 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 70" width="140" height="70">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 140 70" width="140" height="70" fill="none">
   <path
     d="M 22 34 C 36 13, 80 10, 110 24"
-    stroke="#a3b8ff"
-    stroke-width="5"
+    stroke="#ffffff"
+    stroke-width="3.4"
     stroke-linecap="round"
-    fill="none"
   />
   <path
     d="M 118 36 C 104 57, 60 60, 30 46"
-    stroke="#a3b8ff"
-    stroke-width="5"
+    stroke="#ffffff"
+    stroke-width="3.4"
     stroke-linecap="round"
-    fill="none"
   />
   <path
     d="M 42 21 L 12 35 L 56 35"
     stroke="#ffffff"
-    stroke-width="5.5"
+    stroke-width="3.4"
     stroke-linecap="round"
     stroke-linejoin="miter"
-    fill="none"
   />
   <path
     d="M 98 49 L 128 35 L 84 35"
     stroke="#ffffff"
-    stroke-width="5.5"
+    stroke-width="3.4"
     stroke-linecap="round"
     stroke-linejoin="miter"
-    fill="none"
   />
   <circle
     cx="70"
     cy="35"
     r="15.5"
     stroke="#ffffff"
-    stroke-width="5.5"
-    fill="none"
+    stroke-width="3.4"
   />
   <path
     d="M 56 35 L 83.5 26"
     stroke="#ffffff"
-    stroke-width="5.5"
+    stroke-width="3.4"
     stroke-linecap="round"
-    fill="none"
   />
 </svg>
