@@ -12,6 +12,7 @@ import { PerformanceProvider } from "@/components/performance/PerformanceProvide
 import { StructuredData } from "@/components/seo/StructuredData";
 import { MotionProvider } from "@/components/shared/motion/MotionProvider";
 import { PageTransition } from "@/components/shared/motion/PageTransition";
+import { EonxGrid } from "@/components/shared/visual/EonxGrid";
 import { ExperienceProvider } from "@/experience/ExperienceProvider";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getOrganizationSchema, getWebsiteSchema } from "@/lib/seo/schema";
@@ -27,25 +28,28 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <StructuredData data={getOrganizationSchema()} />
-        <StructuredData data={getWebsiteSchema()} />
-        <PerformanceProvider>
-          <MotionProvider>
-            <ExperienceProvider>
-              <AnalyticsProvider>
-                <PageViewTracker />
-                <AttributionProvider />
-                <AnalyticsConsentProvider />
-                <Navbar />
-                <PageTransition>{children}</PageTransition>
-                <Footer />
-                <CookieConsent />
-                <AnalyticsDebug />
-                <PerformanceDebug />
-              </AnalyticsProvider>
-            </ExperienceProvider>
-          </MotionProvider>
-        </PerformanceProvider>
+        <EonxGrid />
+        <div className="relative z-[var(--z-content)]">
+          <StructuredData data={getOrganizationSchema()} />
+          <StructuredData data={getWebsiteSchema()} />
+          <PerformanceProvider>
+            <MotionProvider>
+              <ExperienceProvider>
+                <AnalyticsProvider>
+                  <PageViewTracker />
+                  <AttributionProvider />
+                  <AnalyticsConsentProvider />
+                  <Navbar />
+                  <PageTransition>{children}</PageTransition>
+                  <Footer />
+                  <CookieConsent />
+                  <AnalyticsDebug />
+                  <PerformanceDebug />
+                </AnalyticsProvider>
+              </ExperienceProvider>
+            </MotionProvider>
+          </PerformanceProvider>
+        </div>
       </body>
     </html>
   );

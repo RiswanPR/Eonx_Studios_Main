@@ -1,63 +1,56 @@
 :root {
-  /* ========================================
-     EONX BRAND COLORS
-     ======================================== */
+  /* ============================================================
+     EONX BASE
+     ============================================================ */
 
   --color-eonx-black: #040607;
+  --color-eonx-white: #f7f7f5;
+
+  /* ============================================================
+     EONX BRAND PALETTE
+     ============================================================ */
+
   --color-ultrasonic-blue: #4928c2;
-  --color-hyper-magenta: #bf40fa;
   --color-velvet-purple: #5b2a62;
+  --color-hyper-magenta: #bf40fa;
   --color-periwinkle: #e3d9fc;
 
-  /* ========================================
-     EONX UI COLORS
-     ======================================== */
+  /* ============================================================
+     ATMOSPHERE
+     ============================================================ */
 
-  --color-surface-01: #090a10;
-  --color-surface-02: #10111a;
+  --color-atmosphere-blue: rgba(73, 40, 194, 0.18);
+  --color-atmosphere-purple: rgba(91, 42, 98, 0.18);
+  --color-atmosphere-magenta: rgba(191, 64, 250, 0.1);
 
-  --color-white: #f8f7ff;
-  --color-text-primary: #f8f7ff;
-  --color-text-secondary: #e3d9fc;
-  --color-text-muted: #aaa6b8;
+  /* ============================================================
+     SURFACES
+     ============================================================ */
 
-  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-surface-00: #040607;
+  --color-surface-01: #080a0e;
+  --color-surface-02: #0c0f14;
+  --color-surface-03: #11151c;
+
+  /* ============================================================
+     TEXT
+     ============================================================ */
+
+  --color-text-primary: #f7f7f5;
+  --color-text-secondary: rgba(247, 247, 245, 0.68);
+  --color-text-muted: rgba(247, 247, 245, 0.42);
+
+  /* ============================================================
+     BORDERS
+     ============================================================ */
+
+  --color-border-subtle: rgba(255, 255, 255, 0.05);
   --color-border-default: rgba(255, 255, 255, 0.08);
   --color-border-strong: rgba(255, 255, 255, 0.14);
 
-  /* ========================================
-     EONX GRADIENTS
-     ======================================== */
-
-  --gradient-primary: linear-gradient(
-    135deg,
-    var(--color-ultrasonic-blue),
-    var(--color-hyper-magenta)
-  );
-
-  --gradient-atmospheric: linear-gradient(
-    135deg,
-    var(--color-eonx-black),
-    var(--color-velvet-purple),
-    var(--color-ultrasonic-blue)
-  );
-
-  --gradient-light: linear-gradient(
-    135deg,
-    var(--color-periwinkle),
-    var(--color-hyper-magenta)
-  );
-
-  --gradient-deep: linear-gradient(
-    135deg,
-    var(--color-eonx-black),
-    #1b1030,
-    var(--color-ultrasonic-blue)
-  );
-
-  /* ========================================
-     SEMANTIC COLORS
-     ======================================== */
+  /* ============================================================
+     SEMANTIC COMPATIBILITY BINDINGS
+     ============================================================ */
 
   --background: var(--color-eonx-black);
   --background-secondary: var(--color-surface-01);

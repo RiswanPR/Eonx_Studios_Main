@@ -1,34 +1,64 @@
 :root {
+  /* ============================================================
+     RADIUS
+     ============================================================ */
+
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  --radius-pill: 999px;
+  --radius-full: 9999px;
+
+  /* ============================================================
+     CONTAINERS
+     ============================================================ */
+
+  --container-sm: 720px;
+  --container-md: 960px;
+  --container-lg: 1200px;
+  --container-xl: 1440px;
   --container-max: 90rem;
 
+  /* ============================================================
+     Z-INDEX SYSTEM
+     ============================================================ */
+
+  --z-base: 0;
+  --z-content: 10;
+  --z-sticky: 50;
+  --z-navbar: 100;
+  --z-overlay: 150;
+  --z-modal: 200;
+  --z-command: 300;
+  --z-cursor: 999;
+
+  /* ============================================================
+     GRID TOKENS
+     ============================================================ */
+
+  --grid-size: 72px;
+  --grid-line: rgba(255, 255, 255, 0.035);
+  --grid-opacity: 1;
+
+  /* ============================================================
+     RESPONSIVE PAGE PADDING & COLUMNS
+     ============================================================ */
+
   --page-padding: 1.25rem;
+  --grid-columns: 4;
+  --grid-gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --grid-size: 56px;
+  }
 }
 
 @media (min-width: 48rem) {
   :root {
     --page-padding: 2rem;
-  }
-}
-
-@media (min-width: 64rem) {
-  :root {
-    --page-padding: 3rem;
-  }
-}
-
-@media (min-width: 90rem) {
-  :root {
-    --page-padding: 5rem;
-  }
-}
-
-:root {
-  --grid-columns: 4;
-  --grid-gap: 1rem;
-}
-
-@media (min-width: 48rem) {
-  :root {
     --grid-columns: 8;
     --grid-gap: 1.5rem;
   }
@@ -36,7 +66,14 @@
 
 @media (min-width: 64rem) {
   :root {
+    --page-padding: 3rem;
     --grid-columns: 12;
     --grid-gap: 2rem;
+  }
+}
+
+@media (min-width: 90rem) {
+  :root {
+    --page-padding: 5rem;
   }
 }

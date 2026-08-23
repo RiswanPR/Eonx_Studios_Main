@@ -1,18 +1,24 @@
 :root {
-  /* ========================================
+  /* ============================================================
      DURATIONS
-     ======================================== */
+     ============================================================ */
 
-  --duration-fast: 200ms;
-  --duration-standard: 350ms;
+  --duration-instant: 120ms;
+  --duration-fast: 220ms;
+  --duration-standard: 450ms;
   --duration-smooth: 700ms;
-  --duration-cinematic: 1100ms;
+  --duration-cinematic: 1200ms;
 
-  /* ========================================
-     EASINGS
-     ======================================== */
+  /* ============================================================
+     EASING
+     ============================================================ */
 
-  --ease-eonx: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-standard: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic: cubic-bezier(0.76, 0, 0.24, 1);
+
+  /* Legacy / Compatibility Aliases */
+  --ease-eonx: var(--ease-standard);
   --ease-eonx-in: cubic-bezier(0.55, 0, 1, 0.45);
   --ease-eonx-out: cubic-bezier(0, 0.55, 0.45, 1);
   --ease-eonx-in-out: cubic-bezier(0.65, 0, 0.35, 1);
@@ -20,6 +26,7 @@
 
 @media (prefers-reduced-motion: reduce) {
   :root {
+    --duration-instant: 1ms;
     --duration-fast: 1ms;
     --duration-standard: 1ms;
     --duration-smooth: 1ms;
