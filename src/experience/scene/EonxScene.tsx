@@ -1,7 +1,7 @@
 "use client";
 
 import type { ExperienceQuality } from "@/experience/types/quality";
-import { EonxOrbital } from "@/experience/orbital/EonxOrbital";
+import { OrbitalGroup } from "@/experience/orbital/OrbitalGroup";
 import { EonxLights } from "@/experience/scene/EonxLights";
 import { EonxAtmosphere } from "@/experience/atmosphere/EonxAtmosphere";
 import { OrbitalParticles } from "@/experience/atmosphere/OrbitalParticles";
@@ -17,7 +17,7 @@ export function EonxScene({ quality }: EonxSceneProps) {
       <EonxAtmosphere />
       <EonxLights />
       <CameraRig />
-      <EonxOrbital quality={quality} />
+      <OrbitalGroup quality={quality} />
       <OrbitalParticles quality={quality} />
     </>
   );
