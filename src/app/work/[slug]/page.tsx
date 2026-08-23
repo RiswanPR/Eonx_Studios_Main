@@ -1,0 +1,17 @@
+interface ProjectPageProps {
+    params: Promise<{
+        slug: string;
+    }>;
+}
+
+export default async function ProjectPage({
+    params,
+}: ProjectPageProps) {
+    const { slug } = await params;
+
+    return (
+        <main>
+            <h1>Project: {slug}</h1>
+        </main>
+    );
+}
