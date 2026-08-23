@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Navbar } from "@/components/navigation/Navbar";
 import { MotionProvider } from "@/components/shared/motion/MotionProvider";
 import { PageTransition } from "@/components/shared/motion/PageTransition";
+import { ExperienceProvider } from "@/experience/ExperienceProvider";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -19,8 +20,10 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <MotionProvider>
-          <Navbar />
-          <PageTransition>{children}</PageTransition>
+          <ExperienceProvider>
+            <Navbar />
+            <PageTransition>{children}</PageTransition>
+          </ExperienceProvider>
         </MotionProvider>
       </body>
     </html>
