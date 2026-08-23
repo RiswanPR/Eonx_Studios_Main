@@ -1,4 +1,9 @@
 import type { Metadata } from "next";
+import { AnalyticsConsentProvider } from "@/components/analytics/AnalyticsConsentProvider";
+import { AnalyticsDebug } from "@/components/analytics/AnalyticsDebug";
+import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
+import { AttributionProvider } from "@/components/analytics/AttributionProvider";
+import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import { Footer } from "@/components/footer/Footer";
 import { CookieConsent } from "@/components/legal/CookieConsent";
 import { Navbar } from "@/components/navigation/Navbar";
@@ -24,10 +29,16 @@ export default function RootLayout({
         <StructuredData data={getWebsiteSchema()} />
         <MotionProvider>
           <ExperienceProvider>
-            <Navbar />
-            <PageTransition>{children}</PageTransition>
-            <Footer />
-            <CookieConsent />
+            <AnalyticsProvider>
+              <PageViewTracker />
+              <AttributionProvider />
+              <AnalyticsConsentProvider />
+              <Navbar />
+              <PageTransition>{children}</PageTransition>
+              <Footer />
+              <CookieConsent />
+              <AnalyticsDebug />
+            </AnalyticsProvider>
           </ExperienceProvider>
         </MotionProvider>
       </body>

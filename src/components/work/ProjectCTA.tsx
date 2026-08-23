@@ -1,5 +1,7 @@
+"use client";
+
+import { TrackedCTA } from "@/components/analytics/TrackedCTA";
 import { Magnetic } from "@/components/shared/motion/Magnetic";
-import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Label } from "@/components/ui/Label";
 import { Section } from "@/components/ui/Section";
@@ -32,13 +34,14 @@ export function ProjectCTA() {
 
           <div className="mt-10">
             <Magnetic className="w-fit">
-              <ButtonLink
+              <TrackedCTA
                 href="/book-a-call"
                 size="lg"
-                data-analytics="project-book-call"
+                location="project-page"
+                label="Book a Call"
               >
                 Book a Call
-              </ButtonLink>
+              </TrackedCTA>
             </Magnetic>
           </div>
         </div>

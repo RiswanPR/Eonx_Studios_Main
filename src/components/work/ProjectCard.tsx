@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import type { Project } from "@/types/project";
+import { trackProjectClick } from "@/lib/analytics/events";
 import { cn } from "@/lib/utils/cn";
 
 interface ProjectCardProps {
@@ -14,6 +17,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
     >
       <Link
         href={`/work/${project.slug}`}
+        onClick={() => trackProjectClick(project.slug, "work")}
         className="block focus-visible:outline-none"
       >
         <div

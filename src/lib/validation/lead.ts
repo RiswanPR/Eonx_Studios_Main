@@ -1,5 +1,15 @@
 import { z } from "zod";
 
+export const attributionSchema = z.object({
+  utmSource: z.string().max(200).optional(),
+  utmMedium: z.string().max(200).optional(),
+  utmCampaign: z.string().max(200).optional(),
+  utmTerm: z.string().max(200).optional(),
+  utmContent: z.string().max(200).optional(),
+  referrer: z.string().max(2000).optional(),
+  landingPage: z.string().max(4000).optional(),
+});
+
 export const leadSchema = z.object({
   name: z
     .string()
@@ -73,6 +83,8 @@ export const leadSchema = z.object({
     .max(0, "Spam detected.")
     .optional()
     .or(z.literal("")),
+
+  attribution: attributionSchema.optional(),
 });
 
 export type LeadFormData = z.infer<typeof leadSchema>;

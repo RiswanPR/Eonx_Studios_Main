@@ -1,11 +1,19 @@
+"use client";
+
+import { useEffect } from "react";
 import { Scheduler } from "@/components/forms/booking/Scheduler";
 import { ButtonLink } from "@/components/ui/Button";
+import { trackSchedulerOpen } from "@/lib/analytics/events";
 
 interface BookingSuccessProps {
   leadId: string;
 }
 
 export function BookingSuccess({ leadId }: BookingSuccessProps) {
+  useEffect(() => {
+    trackSchedulerOpen();
+  }, []);
+
   return (
     <div
       role="status"

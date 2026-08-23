@@ -1,9 +1,10 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
+import { TrackedCTA } from "@/components/analytics/TrackedCTA";
 import { EonxExperience } from "@/components/shared/experience/EonxExperience";
 import { Magnetic } from "@/components/shared/motion/Magnetic";
 import { RevealText } from "@/components/shared/motion/RevealText";
-import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Label } from "@/components/ui/Label";
 import { Stack } from "@/components/ui/Stack";
@@ -49,22 +50,25 @@ export function HomeHero() {
 
               <div className="flex flex-wrap items-center gap-3">
                 <Magnetic>
-                  <ButtonLink
+                  <TrackedCTA
                     href="/book-a-call"
                     size="lg"
-                    data-analytics="hero-book-call"
+                    location="hero"
+                    label="Book a Call"
                   >
                     Book a Call
-                  </ButtonLink>
+                  </TrackedCTA>
                 </Magnetic>
 
-                <ButtonLink
+                <TrackedCTA
                   href="/work"
                   variant="secondary"
                   size="lg"
+                  location="hero"
+                  label="View Work"
                 >
                   View Work
-                </ButtonLink>
+                </TrackedCTA>
               </div>
             </Stack>
           </div>

@@ -1,10 +1,12 @@
+"use client";
+
+import { TrackedCTA } from "@/components/analytics/TrackedCTA";
 import { FooterBrand } from "@/components/footer/FooterBrand";
 import { FooterContact } from "@/components/footer/FooterContact";
 import { FooterLegal } from "@/components/footer/FooterLegal";
 import { FooterNavigation } from "@/components/footer/FooterNavigation";
 import { FooterServices } from "@/components/footer/FooterServices";
 import { FooterSocials } from "@/components/footer/FooterSocials";
-import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 
 export function Footer() {
@@ -23,14 +25,15 @@ export function Footer() {
               </h2>
             </div>
 
-            <ButtonLink
+            <TrackedCTA
               href="/book-a-call"
               size="lg"
               className="min-w-44"
-              data-analytics="footer-cta"
+              location="footer"
+              label="Book a Call"
             >
               Book a Call →
-            </ButtonLink>
+            </TrackedCTA>
           </div>
         </Container>
       </div>

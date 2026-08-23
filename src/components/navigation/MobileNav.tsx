@@ -2,11 +2,11 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { TrackedCTA } from "@/components/analytics/TrackedCTA";
 import {
   mainNavigation,
   primaryCta,
 } from "@/config/navigation";
-import { ButtonLink } from "@/components/ui/Button";
 import { cn } from "@/lib/utils/cn";
 
 interface MobileNavProps {
@@ -18,8 +18,7 @@ export function MobileNav({
   open,
   onClose,
 }: MobileNavProps) {
-  const [servicesOpen, setServicesOpen] =
-    useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   return (
     <div
@@ -40,8 +39,7 @@ export function MobileNav({
           className="flex flex-col"
         >
           {mainNavigation.map((item, index) => {
-            const isServices =
-              Boolean(item.children);
+            const isServices = Boolean(item.children);
 
             if (isServices) {
               return (
@@ -67,8 +65,7 @@ export function MobileNav({
                       aria-hidden="true"
                       className={cn(
                         "text-xl transition-transform duration-[var(--duration-standard)]",
-                        servicesOpen &&
-                          "rotate-45",
+                        servicesOpen && "rotate-45",
                       )}
                     >
                       +
@@ -86,10 +83,7 @@ export function MobileNav({
                     <div className="overflow-hidden">
                       <div className="space-y-1 pb-5">
                         {item.children?.map(
-                          (
-                            service,
-                            serviceIndex,
-                          ) => (
+                          (service, serviceIndex) => (
                             <Link
                               key={service.href}
                               href={service.href}
@@ -134,15 +128,16 @@ export function MobileNav({
           })}
         </nav>
 
-        <div className="mt-auto pt-10">
-          <ButtonLink
+        <div className="mt-auto pt-10" onClick={onClose}>
+          <TrackedCTA
             href={primaryCta.href}
             size="lg"
             className="w-full"
-            onClick={onClose}
+            location="navbar"
+            label={primaryCta.label}
           >
             {primaryCta.label}
-          </ButtonLink>
+          </TrackedCTA>
         </div>
       </div>
     </div>

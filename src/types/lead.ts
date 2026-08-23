@@ -1,3 +1,5 @@
+import type { AttributionData } from "@/lib/analytics/attribution";
+
 export interface LeadInquiry {
   name: string;
   email: string;
@@ -11,5 +13,6 @@ export interface LeadInquiry {
   preferredContact: string;
   additionalInformation?: string;
   source?: string;
+  attribution?: AttributionData;
   submittedAt?: string;
 }

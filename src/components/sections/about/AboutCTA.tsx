@@ -1,6 +1,8 @@
+"use client";
+
+import { TrackedCTA } from "@/components/analytics/TrackedCTA";
 import { EonxStaticOrbital } from "@/components/shared/experience/EonxStaticOrbital";
 import { Magnetic } from "@/components/shared/motion/Magnetic";
-import { ButtonLink } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Label } from "@/components/ui/Label";
 import { Section } from "@/components/ui/Section";
@@ -27,13 +29,14 @@ export function AboutCTA() {
             </h2>
 
             <Magnetic className="mt-10 w-fit">
-              <ButtonLink
+              <TrackedCTA
                 href="/book-a-call"
                 size="lg"
-                data-analytics="about-book-call"
+                location="about"
+                label="Book a Call"
               >
                 Book a Call
-              </ButtonLink>
+              </TrackedCTA>
             </Magnetic>
           </div>
 

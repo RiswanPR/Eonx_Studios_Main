@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { BookingError } from "@/components/forms/booking/BookingError";
@@ -12,7 +12,14 @@ import { GoalsStep } from "@/components/forms/booking/GoalsStep";
 import { ProjectStep } from "@/components/forms/booking/ProjectStep";
 import { ReviewStep } from "@/components/forms/booking/ReviewStep";
 import { TimelineStep } from "@/components/forms/booking/TimelineStep";
-import { getAttributionParams } from "@/lib/analytics/attribution";
+import { readStoredAttribution } from "@/lib/analytics/attribution";
+import {
+  trackFormError,
+  trackFormStart,
+  trackFormStep,
+  trackFormSubmit,
+  trackLeadCreated,
+} from "@/lib/analytics/events";
 import { leadSchema, type LeadFormData } from "@/lib/validation/lead";
 
 type BookingStatus = "idle" | "submitting" | "success" | "error";
@@ -38,6 +45,7 @@ export function BookingForm() {
   const [status, setStatus] = useState<BookingStatus>("idle");
   const [createdLeadId, setCreatedLeadId] = useState<string>("");
   const [errorMessage, setErrorMessage] = useState<string>("");
+  const formStarted = useRef(false);
 
   const methods = useForm<LeadFormData>({
     resolver: zodResolver(leadSchema),
@@ -45,14 +53,25 @@ export function BookingForm() {
     mode: "onTouched",
   });
 
-  const { trigger, handleSubmit, setValue } = methods;
+  const { trigger, handleSubmit, setValue, watch } = methods;
 
   useEffect(() => {
-    const attribution = getAttributionParams();
-    if (attribution.source) {
-      setValue("source", attribution.source);
+    const stored = readStoredAttribution();
+    if (stored.utmSource) {
+      setValue("source", stored.utmSource);
     }
   }, [setValue]);
+
+  // Track form_start on first interaction
+  useEffect(() => {
+    const subscription = watch(() => {
+      if (!formStarted.current) {
+        formStarted.current = true;
+        trackFormStart();
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [watch]);
 
   const handleNextStep = async () => {
     let isValid = false;
@@ -68,7 +87,10 @@ export function BookingForm() {
     }
 
     if (isValid) {
+      trackFormStep(currentStep);
       setCurrentStep((prev) => Math.min(prev + 1, 5));
+    } else {
+      trackFormError(currentStep);
     }
   };
 
@@ -77,21 +99,29 @@ export function BookingForm() {
   };
 
   const onSubmit = async (data: LeadFormData) => {
+    trackFormSubmit();
     setStatus("submitting");
     setErrorMessage("");
 
     try {
+      const attribution = readStoredAttribution();
+      const payload = {
+        ...data,
+        attribution,
+      };
+
       const response = await fetch("/api/leads", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify(payload),
       });
 
       const result = await response.json();
 
       if (!response.ok || !result.success) {
+        trackFormError(5);
         setStatus("error");
         setErrorMessage(
           result.message ||
@@ -100,10 +130,12 @@ export function BookingForm() {
         return;
       }
 
+      trackLeadCreated();
       setCreatedLeadId(result.id || crypto.randomUUID());
       setStatus("success");
     } catch (err) {
       console.error("Submission failed:", err);
+      trackFormError(5);
       setStatus("error");
       setErrorMessage(
         "Network connection error. Please check your internet connection and try again.",

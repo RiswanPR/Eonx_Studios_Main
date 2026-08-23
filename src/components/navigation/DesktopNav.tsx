@@ -3,18 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { TrackedCTA } from "@/components/analytics/TrackedCTA";
+import { MegaMenu } from "@/components/navigation/MegaMenu";
 import {
   mainNavigation,
   primaryCta,
 } from "@/config/navigation";
-import { MegaMenu } from "@/components/navigation/MegaMenu";
-import { ButtonLink } from "@/components/ui/Button";
 import { cn } from "@/lib/utils/cn";
 
 export function DesktopNav() {
   const pathname = usePathname();
-  const [servicesOpen, setServicesOpen] =
-    useState(false);
+  const [servicesOpen, setServicesOpen] = useState(false);
 
   return (
     <nav
@@ -35,9 +34,7 @@ export function DesktopNav() {
               <div
                 key={item.label}
                 className="relative"
-                onMouseEnter={() =>
-                  setServicesOpen(true)
-                }
+                onMouseEnter={() => setServicesOpen(true)}
               >
                 <button
                   type="button"
@@ -50,16 +47,11 @@ export function DesktopNav() {
                     "focus-visible:outline-2",
                     "focus-visible:outline-offset-4",
                     "focus-visible:outline-[var(--color-periwinkle)]",
-                    active &&
-                      "text-[var(--color-periwinkle)]",
+                    active && "text-[var(--color-periwinkle)]",
                   )}
                   aria-expanded={servicesOpen}
                   aria-haspopup="true"
-                  onClick={() =>
-                    setServicesOpen(
-                      (current) => !current,
-                    )
-                  }
+                  onClick={() => setServicesOpen((current) => !current)}
                 >
                   {item.label}
 
@@ -77,9 +69,7 @@ export function DesktopNav() {
                 {servicesOpen ? (
                   <MegaMenu
                     items={item.children ?? []}
-                    onClose={() =>
-                      setServicesOpen(false)
-                    }
+                    onClose={() => setServicesOpen(false)}
                   />
                 ) : null}
               </div>
@@ -98,8 +88,7 @@ export function DesktopNav() {
                 "focus-visible:outline-2",
                 "focus-visible:outline-offset-4",
                 "focus-visible:outline-[var(--color-periwinkle)]",
-                active &&
-                  "text-[var(--color-periwinkle)]",
+                active && "text-[var(--color-periwinkle)]",
               )}
             >
               {item.label}
@@ -108,12 +97,14 @@ export function DesktopNav() {
         })}
       </div>
 
-      <ButtonLink
+      <TrackedCTA
         href={primaryCta.href}
         size="sm"
+        location="navbar"
+        label={primaryCta.label}
       >
         {primaryCta.label}
-      </ButtonLink>
+      </TrackedCTA>
     </nav>
   );
 }

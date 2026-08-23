@@ -1,5 +1,8 @@
+"use client";
+
 import Link from "next/link";
 import type { Service } from "@/types/service";
+import { trackServiceClick } from "@/lib/analytics/events";
 import { cn } from "@/lib/utils/cn";
 
 interface ServiceCardProps {
@@ -21,6 +24,7 @@ export function ServiceCard({
       data-service={service.slug}
       onMouseEnter={onHover}
       onFocus={onHover}
+      onClick={() => trackServiceClick(service.slug, "services")}
       className={cn(
         "group flex items-center justify-between gap-4 border-t border-[var(--color-border-subtle)] py-6",
         "transition-colors duration-[var(--duration-standard)]",

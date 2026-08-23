@@ -84,6 +84,7 @@ export async function POST(request: Request) {
       preferredContact: data.preferredContact,
       additionalInformation: data.additionalInformation || undefined,
       source: data.source || undefined,
+      attribution: data.attribution,
       submittedAt: new Date().toISOString(),
     };
 

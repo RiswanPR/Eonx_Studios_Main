@@ -1,4 +1,5 @@
 import type { Service } from "@/types/service";
+import { ServiceViewTracker } from "@/components/analytics/ServiceViewTracker";
 import { NextService } from "@/components/services/NextService";
 import { RelatedProjects } from "@/components/services/RelatedProjects";
 import { RelatedServices } from "@/components/services/RelatedServices";
@@ -17,6 +18,7 @@ interface ServiceDetailPageProps {
 export function ServiceDetailPage({ service }: ServiceDetailPageProps) {
   return (
     <main>
+      <ServiceViewTracker slug={service.slug} />
       <ServiceHero service={service} />
       <ServiceCapabilities service={service} />
       <ServiceDeliverables service={service} />

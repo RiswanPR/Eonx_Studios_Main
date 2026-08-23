@@ -1,4 +1,5 @@
 import type { Project } from "@/types/project";
+import { ProjectViewTracker } from "@/components/analytics/ProjectViewTracker";
 import { CaseStudySection } from "@/components/work/CaseStudySection";
 import { NextProject } from "@/components/work/NextProject";
 import { ProjectCTA } from "@/components/work/ProjectCTA";
@@ -18,6 +19,7 @@ interface ProjectDetailPageProps {
 export function ProjectDetailPage({ project }: ProjectDetailPageProps) {
   return (
     <main>
+      <ProjectViewTracker slug={project.slug} />
       <ProjectHero project={project} />
       <ProjectOverview project={project} />
 
