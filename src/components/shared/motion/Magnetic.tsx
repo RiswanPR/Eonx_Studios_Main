@@ -20,10 +20,14 @@ export function Magnetic({
   const handleMove = (event: PointerEvent<HTMLDivElement>) => {
     const element = ref.current;
 
+    const finePointer =
+      typeof window !== "undefined" &&
+      window.matchMedia("(pointer: fine)").matches;
+
     if (
       !element ||
       prefersReducedMotion() ||
-      window.innerWidth < 768 ||
+      !finePointer ||
       event.pointerType === "touch"
     ) {
       return;

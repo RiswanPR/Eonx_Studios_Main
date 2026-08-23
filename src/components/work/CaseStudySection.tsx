@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ProjectMedia } from "@/types/project";
 import { Container } from "@/components/ui/Container";
 import { Label } from "@/components/ui/Label";
@@ -47,11 +48,13 @@ export function CaseStudySection({
 
           <div className="lg:col-span-7">
             {media && media[0]?.type === "image" ? (
-              <div className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-subtle)] bg-[var(--color-eonx-black)]">
-                <img
+              <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-subtle)] bg-[var(--color-eonx-black)]">
+                <Image
                   src={media[0].src}
                   alt={media[0].alt}
-                  className="aspect-[16/10] w-full object-cover"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 60vw"
+                  className="object-cover"
                 />
               </div>
             ) : (

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { TeamMember } from "@/types/team";
 import { cn } from "@/lib/utils/cn";
 
@@ -27,10 +28,12 @@ export function TeamCard({ member, onSelect }: TeamCardProps) {
         )}
       >
         {member.image ? (
-          <img
+          <Image
             src={member.image}
             alt={`${member.name} — ${member.role}`}
-            className="h-full w-full object-cover grayscale transition-all duration-[var(--duration-standard)] group-hover:scale-[1.03] group-hover:grayscale-0"
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-cover grayscale transition-all duration-[var(--duration-standard)] group-hover:scale-[1.03] group-hover:grayscale-0"
           />
         ) : (
           <div
@@ -41,10 +44,10 @@ export function TeamCard({ member, onSelect }: TeamCardProps) {
 
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"
+          className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"
         />
 
-        <div className="absolute inset-x-5 bottom-5">
+        <div className="absolute inset-x-5 bottom-5 pointer-events-none">
           <h3 className="font-[var(--font-display)] text-2xl tracking-[-0.02em] text-white md:text-3xl">
             {member.name}
           </h3>

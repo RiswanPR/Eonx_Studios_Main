@@ -7,6 +7,8 @@ import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import { Footer } from "@/components/footer/Footer";
 import { CookieConsent } from "@/components/legal/CookieConsent";
 import { Navbar } from "@/components/navigation/Navbar";
+import { PerformanceDebug } from "@/components/performance/PerformanceDebug";
+import { PerformanceProvider } from "@/components/performance/PerformanceProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
 import { MotionProvider } from "@/components/shared/motion/MotionProvider";
 import { PageTransition } from "@/components/shared/motion/PageTransition";
@@ -27,20 +29,23 @@ export default function RootLayout({
       <body>
         <StructuredData data={getOrganizationSchema()} />
         <StructuredData data={getWebsiteSchema()} />
-        <MotionProvider>
-          <ExperienceProvider>
-            <AnalyticsProvider>
-              <PageViewTracker />
-              <AttributionProvider />
-              <AnalyticsConsentProvider />
-              <Navbar />
-              <PageTransition>{children}</PageTransition>
-              <Footer />
-              <CookieConsent />
-              <AnalyticsDebug />
-            </AnalyticsProvider>
-          </ExperienceProvider>
-        </MotionProvider>
+        <PerformanceProvider>
+          <MotionProvider>
+            <ExperienceProvider>
+              <AnalyticsProvider>
+                <PageViewTracker />
+                <AttributionProvider />
+                <AnalyticsConsentProvider />
+                <Navbar />
+                <PageTransition>{children}</PageTransition>
+                <Footer />
+                <CookieConsent />
+                <AnalyticsDebug />
+                <PerformanceDebug />
+              </AnalyticsProvider>
+            </ExperienceProvider>
+          </MotionProvider>
+        </PerformanceProvider>
       </body>
     </html>
   );

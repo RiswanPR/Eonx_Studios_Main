@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Project } from "@/types/project";
 import { Breadcrumbs } from "@/components/seo/Breadcrumbs";
 import { RevealText } from "@/components/shared/motion/RevealText";
@@ -51,12 +52,15 @@ export function ProjectHero({ project }: ProjectHeroProps) {
 
         {/* Hero Media Container */}
         <div className="mt-12 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-subtle)] bg-[var(--color-surface-01)]">
-          <div className="aspect-[16/9] w-full">
+          <div className="relative aspect-[16/9] w-full">
             {project.media[0]?.type === "image" ? (
-              <img
+              <Image
                 src={project.media[0].src}
                 alt={project.media[0].alt}
-                className="h-full w-full object-cover"
+                fill
+                priority
+                sizes="(max-width: 768px) 100vw, 90vw"
+                className="object-cover"
               />
             ) : (
               <div

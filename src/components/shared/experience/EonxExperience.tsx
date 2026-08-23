@@ -1,8 +1,16 @@
 "use client";
 
-import { EonxCanvas } from "@/experience/scene/EonxCanvas";
+import dynamic from "next/dynamic";
 import { EonxStaticOrbital } from "@/components/shared/experience/EonxStaticOrbital";
 import { useExperience } from "@/experience/ExperienceProvider";
+
+const EonxCanvas = dynamic(
+  () => import("@/experience/scene/EonxCanvas").then((module) => module.EonxCanvas),
+  {
+    ssr: false,
+    loading: () => null,
+  },
+);
 
 export function EonxExperience() {
   const { quality, webGLAvailable } = useExperience();

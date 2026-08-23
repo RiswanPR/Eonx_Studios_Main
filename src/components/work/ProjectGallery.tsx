@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { Project } from "@/types/project";
 import { Container } from "@/components/ui/Container";
 import { Label } from "@/components/ui/Label";
@@ -31,13 +32,15 @@ export function ProjectGallery({ project }: ProjectGalleryProps) {
           {project.media.map((item) => (
             <div
               key={item.src}
-              className="overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-subtle)] bg-[var(--color-eonx-black)]"
+              className="relative aspect-[16/10] overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border-subtle)] bg-[var(--color-eonx-black)]"
             >
               {item.type === "image" ? (
-                <img
+                <Image
                   src={item.src}
                   alt={item.alt}
-                  className="aspect-[16/10] w-full object-cover"
+                  fill
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                  className="object-cover"
                 />
               ) : (
                 <video
@@ -46,7 +49,7 @@ export function ProjectGallery({ project }: ProjectGalleryProps) {
                   controls
                   playsInline
                   preload="metadata"
-                  className="aspect-[16/10] w-full object-cover"
+                  className="h-full w-full object-cover"
                 >
                   <track kind="captions" />
                 </video>

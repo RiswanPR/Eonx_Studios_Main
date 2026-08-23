@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import type { Project } from "@/types/project";
 import { trackProjectClick } from "@/lib/analytics/events";
@@ -35,10 +36,16 @@ export function ProjectCard({ project }: ProjectCardProps) {
             )}
           >
             {project.media && project.media[0]?.type === "image" ? (
-              <img
+              <Image
                 src={project.media[0].src}
                 alt={project.media[0].alt}
-                className="h-full w-full object-cover transition-transform duration-[var(--duration-cinematic)] group-hover:scale-[1.03]"
+                fill
+                sizes={
+                  project.featured
+                    ? "(max-width: 768px) 100vw, 90vw"
+                    : "(max-width: 768px) 100vw, 50vw"
+                }
+                className="object-cover transition-transform duration-[var(--duration-cinematic)] group-hover:scale-[1.03]"
               />
             ) : (
               <div
@@ -49,10 +56,10 @@ export function ProjectCard({ project }: ProjectCardProps) {
 
             <div
               aria-hidden="true"
-              className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"
+              className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none"
             />
 
-            <div className="absolute inset-x-6 bottom-6 flex items-end justify-between gap-6">
+            <div className="absolute inset-x-6 bottom-6 flex items-end justify-between gap-6 pointer-events-none">
               <div>
                 <h2 className="font-[var(--font-display)] text-3xl tracking-[-0.03em] md:text-4xl">
                   {project.title}

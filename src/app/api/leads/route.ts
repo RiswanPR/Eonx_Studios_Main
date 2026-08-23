@@ -1,30 +1,12 @@
 import { NextResponse } from "next/server";
 import { createLead } from "@/lib/leads/createLead";
 import { confirmLead, notifyEonx } from "@/lib/leads/notifications";
+import { logError } from "@/lib/monitoring/logger";
+import { checkRateLimit } from "@/lib/security/rateLimit";
 import { leadSchema } from "@/lib/validation/lead";
 import type { LeadInquiry } from "@/types/lead";
 
-// Simple in-memory rate limiting window (60s)
-const ipRequestCounts = new Map<string, { count: number; expiresAt: number }>();
-const RATE_LIMIT_MAX = 10;
-const RATE_LIMIT_WINDOW_MS = 60 * 1000;
-
-function isRateLimited(ip: string): boolean {
-  const now = Date.now();
-  const record = ipRequestCounts.get(ip);
-
-  if (!record || record.expiresAt < now) {
-    ipRequestCounts.set(ip, { count: 1, expiresAt: now + RATE_LIMIT_WINDOW_MS });
-    return false;
-  }
-
-  if (record.count >= RATE_LIMIT_MAX) {
-    return true;
-  }
-
-  record.count += 1;
-  return false;
-}
+const MAX_REQUEST_SIZE_BYTES = 32 * 1024; // 32KB
 
 export async function POST(request: Request) {
   try {
@@ -32,20 +14,45 @@ export async function POST(request: Request) {
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
       "127.0.0.1";
 
-    if (isRateLimited(ip)) {
+    // 1. Rate Limiting Check
+    const rateLimit = await checkRateLimit(ip);
+    if (!rateLimit.success) {
       return NextResponse.json(
         {
           success: false,
-          message: "Too many requests. Please try again in a moment.",
+          message: "Too many requests. Please try again later.",
         },
         { status: 429 },
       );
     }
 
-    const body = await request.json();
+    // 2. Request Size Protection
+    const rawBody = await request.text();
+    if (rawBody.length > MAX_REQUEST_SIZE_BYTES) {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Request payload too large.",
+        },
+        { status: 413 },
+      );
+    }
 
-    // Honeypot check
-    if (body.website && body.website.trim().length > 0) {
+    let body: Record<string, unknown>;
+    try {
+      body = JSON.parse(rawBody);
+    } catch {
+      return NextResponse.json(
+        {
+          success: false,
+          message: "Invalid JSON format.",
+        },
+        { status: 400 },
+      );
+    }
+
+    // 3. Honeypot check
+    if (typeof body.website === "string" && body.website.trim().length > 0) {
       return NextResponse.json(
         {
           success: false,
@@ -55,7 +62,7 @@ export async function POST(request: Request) {
       );
     }
 
-    // Server-side Zod validation
+    // 4. Server-side Zod validation
     const result = leadSchema.safeParse(body);
 
     if (!result.success) {
@@ -88,10 +95,10 @@ export async function POST(request: Request) {
       submittedAt: new Date().toISOString(),
     };
 
-    // 1. Create lead (Primary)
+    // 5. Create lead (Primary)
     const leadResult = await createLead(leadInquiry);
 
-    // 2. Notifications (Secondary - failure does not abort lead success)
+    // 6. Notifications (Secondary - failure does not abort lead success)
     await Promise.allSettled([
       notifyEonx(leadInquiry),
       confirmLead(leadInquiry),
@@ -102,11 +109,11 @@ export async function POST(request: Request) {
       id: leadResult.id,
     });
   } catch (error) {
-    console.error("Lead submission error:", error);
+    logError(error, { route: "/api/leads" });
     return NextResponse.json(
       {
         success: false,
-        message: "We couldn't process your request. Please try again.",
+        message: "Unable to process the request.",
       },
       { status: 500 },
     );
