@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Navbar } from "@/components/navigation/Navbar";
+import { MotionProvider } from "@/components/shared/motion/MotionProvider";
+import { PageTransition } from "@/components/shared/motion/PageTransition";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -16,8 +18,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
+        <MotionProvider>
+          <Navbar />
+          <PageTransition>{children}</PageTransition>
+        </MotionProvider>
       </body>
     </html>
   );
