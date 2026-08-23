@@ -99,7 +99,7 @@ body {
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
+    animation-duration: 1ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
@@ -141,4 +141,28 @@ body {
     rgba(191, 64, 250, 0.12),
     transparent 60%
   );
+}
+
+/* ========================================
+   D2 ATMOSPHERE KEYFRAMES
+   ======================================== */
+
+@keyframes eonx-light-streak {
+  0% {
+    transform: translate3d(-10vw, 8vh, 0) rotate(-18deg) scaleX(0.8);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.65;
+  }
+  82% {
+    opacity: 0.25;
+  }
+  100% {
+    transform: translate3d(150vw, -12vh, 0) rotate(-18deg) scaleX(1.15);
+    opacity: 0;
+  }
 }

@@ -10,9 +10,9 @@ import { Navbar } from "@/components/navigation/Navbar";
 import { PerformanceDebug } from "@/components/performance/PerformanceDebug";
 import { PerformanceProvider } from "@/components/performance/PerformanceProvider";
 import { StructuredData } from "@/components/seo/StructuredData";
+import { AtmosphereEngine } from "@/components/shared/atmosphere/AtmosphereEngine";
 import { MotionProvider } from "@/components/shared/motion/MotionProvider";
 import { PageTransition } from "@/components/shared/motion/PageTransition";
-import { EonxGrid } from "@/components/shared/visual/EonxGrid";
 import { ExperienceProvider } from "@/experience/ExperienceProvider";
 import { buildMetadata } from "@/lib/seo/metadata";
 import { getOrganizationSchema, getWebsiteSchema } from "@/lib/seo/schema";
@@ -28,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <EonxGrid />
+        <AtmosphereEngine />
         <div className="relative z-[var(--z-content)]">
           <StructuredData data={getOrganizationSchema()} />
           <StructuredData data={getWebsiteSchema()} />
