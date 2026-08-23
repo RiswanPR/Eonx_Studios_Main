@@ -53,7 +53,7 @@ export function BookingForm() {
     mode: "onTouched",
   });
 
-  const { trigger, handleSubmit, setValue, watch } = methods;
+  const { trigger, handleSubmit, setValue } = methods;
 
   useEffect(() => {
     const stored = readStoredAttribution();
@@ -62,16 +62,12 @@ export function BookingForm() {
     }
   }, [setValue]);
 
-  // Track form_start on first interaction
-  useEffect(() => {
-    const subscription = watch(() => {
-      if (!formStarted.current) {
-        formStarted.current = true;
-        trackFormStart();
-      }
-    });
-    return () => subscription.unsubscribe();
-  }, [watch]);
+  const handleInteraction = () => {
+    if (!formStarted.current) {
+      formStarted.current = true;
+      trackFormStart();
+    }
+  };
 
   const handleNextStep = async () => {
     let isValid = false;
@@ -165,6 +161,8 @@ export function BookingForm() {
       <form
         data-form="booking"
         onSubmit={handleSubmit(onSubmit)}
+        onFocusCapture={handleInteraction}
+        onChangeCapture={handleInteraction}
         className="w-full"
         noValidate
       >
