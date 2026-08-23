@@ -105,7 +105,9 @@ body {
     scroll-behavior: auto !important;
   }
 
-  .eonx-intro-orbit {
+  .eonx-intro-orbit,
+  .eonx-light-motion,
+  [class*="eonx-light-"] {
     animation: none !important;
   }
 }
@@ -227,5 +229,69 @@ body {
   }
   to {
     transform: rotate(0deg);
+  }
+}
+
+/* ========================================
+   D6 KINETIC LIGHT KEYFRAMES
+   ======================================== */
+
+@keyframes eonx-light-pass {
+  0% {
+    transform: translateX(-140%);
+    opacity: 0;
+  }
+  12% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.75;
+  }
+  85% {
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(430%);
+    opacity: 0;
+  }
+}
+
+@keyframes eonx-dash {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+
+@keyframes eonx-border-sweep {
+  0% {
+    transform: translateX(-180%);
+  }
+  45%,
+  100% {
+    transform: translateX(520%);
+  }
+}
+
+@keyframes eonx-orbital-beam {
+  0%,
+  100% {
+    transform: rotate(-8deg) scaleX(0.72);
+    opacity: 0.2;
+  }
+  50% {
+    transform: rotate(8deg) scaleX(1);
+    opacity: 0.85;
+  }
+}
+
+@keyframes eonx-energy-pulse {
+  0%,
+  100% {
+    transform: scale(0.8);
+    opacity: 0.28;
+  }
+  50% {
+    transform: scale(1);
+    opacity: 0.75;
   }
 }

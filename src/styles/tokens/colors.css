@@ -49,6 +49,28 @@
   --color-border-strong: rgba(255, 255, 255, 0.14);
 
   /* ============================================================
+     SPECTRAL LIGHT GRADIENTS
+     ============================================================ */
+
+  --eonx-light-gradient: linear-gradient(
+    90deg,
+    transparent 0%,
+    var(--color-ultrasonic-blue) 34%,
+    var(--color-periwinkle) 54%,
+    var(--color-hyper-magenta) 72%,
+    transparent 100%
+  );
+
+  --eonx-light-gradient-soft: linear-gradient(
+    90deg,
+    transparent,
+    rgba(73, 40, 194, 0.35),
+    rgba(227, 217, 252, 0.35),
+    rgba(191, 64, 250, 0.25),
+    transparent
+  );
+
+  /* ============================================================
      SEMANTIC COMPATIBILITY BINDINGS
      ============================================================ */
 
