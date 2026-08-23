@@ -1,0 +1,77 @@
+:root {
+  /* ========================================
+     EONX BRAND COLORS
+     ======================================== */
+
+  --color-eonx-black: #040607;
+  --color-ultrasonic-blue: #4928c2;
+  --color-hyper-magenta: #bf40fa;
+  --color-velvet-purple: #5b2a62;
+  --color-periwinkle: #e3d9fc;
+
+  /* ========================================
+     EONX UI COLORS
+     ======================================== */
+
+  --color-surface-01: #090a10;
+  --color-surface-02: #10111a;
+
+  --color-white: #f8f7ff;
+  --color-text-primary: #f8f7ff;
+  --color-text-secondary: #e3d9fc;
+  --color-text-muted: #aaa6b8;
+
+  --color-border-subtle: rgba(255, 255, 255, 0.06);
+  --color-border-default: rgba(255, 255, 255, 0.08);
+  --color-border-strong: rgba(255, 255, 255, 0.14);
+
+  /* ========================================
+     EONX GRADIENTS
+     ======================================== */
+
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-ultrasonic-blue),
+    var(--color-hyper-magenta)
+  );
+
+  --gradient-atmospheric: linear-gradient(
+    135deg,
+    var(--color-eonx-black),
+    var(--color-velvet-purple),
+    var(--color-ultrasonic-blue)
+  );
+
+  --gradient-light: linear-gradient(
+    135deg,
+    var(--color-periwinkle),
+    var(--color-hyper-magenta)
+  );
+
+  --gradient-deep: linear-gradient(
+    135deg,
+    var(--color-eonx-black),
+    #1b1030,
+    var(--color-ultrasonic-blue)
+  );
+
+  /* ========================================
+     SEMANTIC COLORS
+     ======================================== */
+
+  --background: var(--color-eonx-black);
+  --background-secondary: var(--color-surface-01);
+  --background-elevated: var(--color-surface-02);
+
+  --foreground: var(--color-text-primary);
+  --foreground-secondary: var(--color-text-secondary);
+  --foreground-muted: var(--color-text-muted);
+
+  --accent: var(--color-ultrasonic-blue);
+  --accent-energy: var(--color-hyper-magenta);
+  --accent-light: var(--color-periwinkle);
+
+  --border: var(--color-border-default);
+  --border-subtle: var(--color-border-subtle);
+  --border-strong: var(--color-border-strong);
+}

@@ -1,13 +1,13 @@
 @import "tailwindcss";
 
-@import "../styles/tokens/colors.css";
-@import "../styles/tokens/typography.css";
-@import "../styles/tokens/spacing.css";
-@import "../styles/tokens/layout.css";
-@import "../styles/tokens/effects.css";
-@import "../styles/tokens/motion.css";
-@import "../styles/fonts.css";
-@import "../styles/type.css";
+@import "./tokens/colors.css";
+@import "./tokens/typography.css";
+@import "./tokens/spacing.css";
+@import "./tokens/layout.css";
+@import "./tokens/effects.css";
+@import "./tokens/motion.css";
+@import "./fonts.css";
+@import "./type.css";
 
 :root {
   color-scheme: dark;

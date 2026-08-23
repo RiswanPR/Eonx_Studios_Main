@@ -1,0 +1,65 @@
+:root {
+  /* ========================================
+     FONT FAMILIES
+     ======================================== */
+
+  --font-display: "Instrument Serif", Georgia, serif;
+  --font-body: "Manrope", Arial, sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  /* ========================================
+     FONT WEIGHTS
+     ======================================== */
+
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* ========================================
+     DISPLAY
+     ======================================== */
+
+  --text-display-xl: clamp(4rem, 9vw, 9rem);
+  --text-display-lg: clamp(3.25rem, 6vw, 6rem);
+  --text-display-md: clamp(2.75rem, 5vw, 5rem);
+
+  /* ========================================
+     HEADINGS
+     ======================================== */
+
+  --text-heading-xl: clamp(2.5rem, 4.5vw, 4.5rem);
+  --text-heading-lg: clamp(2rem, 3.5vw, 4rem);
+  --text-heading-md: clamp(1.75rem, 3vw, 3rem);
+  --text-heading-sm: clamp(1.5rem, 2.5vw, 2rem);
+
+  /* ========================================
+     BODY
+     ======================================== */
+
+  --text-body-xl: clamp(1.125rem, 1.4vw, 1.35rem);
+  --text-body-lg: 1.125rem;
+  --text-body-md: 1rem;
+  --text-body-sm: 0.875rem;
+  --text-label: 0.75rem;
+
+  /* ========================================
+     LINE HEIGHT
+     ======================================== */
+
+  --leading-display: 0.92;
+  --leading-heading: 1;
+  --leading-tight: 1.15;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.7;
+
+  /* ========================================
+     LETTER SPACING
+     ======================================== */
+
+  --tracking-display: -0.05em;
+  --tracking-heading: -0.03em;
+  --tracking-normal: 0;
+  --tracking-label: 0.12em;
+}

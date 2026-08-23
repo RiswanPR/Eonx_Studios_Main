@@ -1,0 +1,42 @@
+:root {
+  --container-max: 90rem;
+
+  --page-padding: 1.25rem;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --page-padding: 2rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --page-padding: 3rem;
+  }
+}
+
+@media (min-width: 90rem) {
+  :root {
+    --page-padding: 5rem;
+  }
+}
+
+:root {
+  --grid-columns: 4;
+  --grid-gap: 1rem;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --grid-columns: 8;
+    --grid-gap: 1.5rem;
+  }
+}
+
+@media (min-width: 64rem) {
+  :root {
+    --grid-columns: 12;
+    --grid-gap: 2rem;
+  }
+}
