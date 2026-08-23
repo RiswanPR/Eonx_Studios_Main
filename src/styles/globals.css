@@ -104,6 +104,10 @@ body {
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
   }
+
+  .eonx-intro-orbit {
+    animation: none !important;
+  }
 }
 
 /* ========================================
@@ -201,5 +205,27 @@ body {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ========================================
+   D4 CINEMATIC INTRO KEYFRAMES
+   ======================================== */
+
+@keyframes eonx-intro-orbit {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes eonx-intro-orbit-reverse {
+  from {
+    transform: rotate(360deg);
+  }
+  to {
+    transform: rotate(0deg);
   }
 }

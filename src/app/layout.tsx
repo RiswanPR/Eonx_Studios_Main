@@ -5,6 +5,7 @@ import { AnalyticsProvider } from "@/components/analytics/AnalyticsProvider";
 import { AttributionProvider } from "@/components/analytics/AttributionProvider";
 import { PageViewTracker } from "@/components/analytics/PageViewTracker";
 import { Footer } from "@/components/footer/Footer";
+import { IntroGate } from "@/components/intro/IntroGate";
 import { CookieConsent } from "@/components/legal/CookieConsent";
 import { Navbar } from "@/components/navigation/Navbar";
 import { PerformanceDebug } from "@/components/performance/PerformanceDebug";
@@ -29,27 +30,29 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <AtmosphereEngine />
-        <div className="relative z-[var(--z-content)]">
-          <StructuredData data={getOrganizationSchema()} />
-          <StructuredData data={getWebsiteSchema()} />
-          <PerformanceProvider>
-            <MotionProvider>
-              <ExperienceProvider>
-                <AnalyticsProvider>
-                  <PageViewTracker />
-                  <AttributionProvider />
-                  <AnalyticsConsentProvider />
-                  <Navbar />
-                  <PageTransition>{children}</PageTransition>
-                  <Footer />
-                  <CookieConsent />
-                  <AnalyticsDebug />
-                  <PerformanceDebug />
-                </AnalyticsProvider>
-              </ExperienceProvider>
-            </MotionProvider>
-          </PerformanceProvider>
-        </div>
+        <IntroGate>
+          <div className="relative z-[var(--z-content)]">
+            <StructuredData data={getOrganizationSchema()} />
+            <StructuredData data={getWebsiteSchema()} />
+            <PerformanceProvider>
+              <MotionProvider>
+                <ExperienceProvider>
+                  <AnalyticsProvider>
+                    <PageViewTracker />
+                    <AttributionProvider />
+                    <AnalyticsConsentProvider />
+                    <Navbar />
+                    <PageTransition>{children}</PageTransition>
+                    <Footer />
+                    <CookieConsent />
+                    <AnalyticsDebug />
+                    <PerformanceDebug />
+                  </AnalyticsProvider>
+                </ExperienceProvider>
+              </MotionProvider>
+            </PerformanceProvider>
+          </div>
+        </IntroGate>
       </body>
     </html>
   );
